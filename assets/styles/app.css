@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind plugins;
+
+.all-height {
+    height: calc(100vh - 64px); /* 64px hauteur du header */
+}
