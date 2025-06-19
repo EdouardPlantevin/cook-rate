@@ -7,4 +7,8 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+import Alpine from 'alpinejs'
+import collapse from '@alpinejs/collapse'
+window.Alpine = Alpine
+Alpine.plugin(collapse)
+Alpine.start()
