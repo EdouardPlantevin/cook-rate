@@ -49,4 +49,7 @@ return [
     'picocolors' => [
         'version' => '1.1.1',
     ],
+    '@alpinejs/focus' => [
+        'version' => '3.14.9',
+    ],
 ];

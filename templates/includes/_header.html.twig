@@ -55,6 +55,8 @@
 
 
                     {% if app.user %}
+
+                        {% include "includes/modal/_add_friend.html.twig" %}
                         <a
                             class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm dark:hover:bg-teal-500"
                             href="{{ path('app_logout') }}"
