@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Team;
@@ -71,9 +73,16 @@ final class TeamController extends AbstractController
         ]);
     }
 
-    #[Route('/brigades/delete/{id}', name: 'app_team_delete')]
-    public function delete(int $id): Response
+    #[Route('/brigades/delete/{id}', name: 'app_team_delete', methods: ['POST'])]
+    public function delete(int $id, Request $request): Response
     {
+
+        $submittedToken = $request->request->get('_token');
+
+        if (!$this->isCsrfTokenValid('delete_team_' . $id, $submittedToken)) {
+            throw $this->createAccessDeniedException('Token CSRF invalide.');
+        }
+
         $team = $this->teamRepository->find($id);
 
         if (!$team) {
