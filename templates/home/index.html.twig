@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello World{% endblock %}
+{% block title %}Team note{% endblock %}
 
 {% block body %}
 
@@ -17,18 +17,22 @@
                     Rejoignez notre communauté pour noter et évaluer des restaurants avec vos amis. Créez des équipes, planifiez des sorties au restaurant, et partagez vos expériences pour trouver les meilleurs endroits en ville.
                 </p>
                 <div class="mt-4 flex justify-center gap-4 sm:mt-6">
-                    <a
-                        class="inline-block rounded border border-indigo-600 bg-indigo-600 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
-                        href="#"
-                    >
-                        Commencer
-                    </a>
-                    <a
-                        class="inline-block rounded border border-gray-200 px-5 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
-                        href="#"
-                    >
-                        En savoir plus
-                    </a>
+                    {% if app.user %}
+                        <a
+                            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
+                            href="{{ path('app_team') }}"
+                        >
+                            Créer/Rejoindre une brigade
+                        </a>
+                    {% else %}
+                        <a
+                            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-5 py-3 font-medium text-white shadow-sm transition-colors hover:bg-indigo-700"
+                            href="{{ path('app_register') }}"
+                        >
+                            Commencer
+                        </a>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
