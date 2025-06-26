@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Team>
      */
-    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'contributor')]
+    #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: 'contributors')]
     private Collection $teams;
 
     public function __construct()
