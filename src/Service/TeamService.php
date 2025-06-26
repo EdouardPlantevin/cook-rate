@@ -32,19 +32,22 @@ readonly class TeamService
     public function generateUniqueTeamCode(): string
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $code = '';
+        $maxAttempts = 100; // Limiter le nombre de tentatives
+        $attempts = 0;
 
-        // Générer un code de 6 caractères aléatoires
-        for ($i = 0; $i < 6; $i++) {
-            $code .= $characters[rand(0, strlen($characters) - 1)];
-        }
+        do {
+            $code = '';
+            for ($i = 0; $i < 6; $i++) {
+                $code .= $characters[rand(0, strlen($characters) - 1)];
+            }
 
-        // Vérifier si le code est unique, sinon régénérer
-        if ($this->isTeamCodeUnique($code)) {
-            return self::PREFIX_CODE . $code;
-        }
+            $attempts++;
+            if ($this->isTeamCodeUnique($code)) {
+                return self::PREFIX_CODE . $code;
+            }
+        } while ($attempts < $maxAttempts);
 
-        return $this->generateUniqueTeamCode();
+        throw new \RuntimeException('Unable to generate a unique team code after ' . $maxAttempts . ' attempts.');
     }
 
     private function isTeamCodeUnique(string $code): bool
@@ -56,7 +59,7 @@ readonly class TeamService
     {
         $teamCount = $user->getTeams()->count();
 
-        // Retourner true si l'utilisateur a 10 équipes ou moins, sinon false
+        // Retourner true si l'utilisateur a plus de 10 équipes, sinon false
         return $teamCount >= 10;
     }
 

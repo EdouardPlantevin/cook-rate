@@ -28,14 +28,14 @@ class Team
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'teams')]
-    private Collection $contributor;
+    private Collection $contributors;
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $code = null;
 
     public function __construct()
     {
-        $this->contributor = new ArrayCollection();
+        $this->contributors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,15 +58,15 @@ class Team
     /**
      * @return Collection<int, User>
      */
-    public function getContributor(): Collection
+    public function getContributors(): Collection
     {
-        return $this->contributor;
+        return $this->contributors;
     }
 
     public function addContributor(User $contributor): static
     {
-        if (!$this->contributor->contains($contributor)) {
-            $this->contributor->add($contributor);
+        if (!$this->contributors->contains($contributor)) {
+            $this->contributors->add($contributor);
         }
 
         return $this;
@@ -74,7 +74,7 @@ class Team
 
     public function removeContributor(User $contributor): static
     {
-        $this->contributor->removeElement($contributor);
+        $this->contributors->removeElement($contributor);
 
         return $this;
     }

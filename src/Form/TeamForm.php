@@ -21,7 +21,7 @@ class TeamForm extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'constraints' => [
-                    new NotBlank(message: 'Le code est requis.'),
+                    new NotBlank(message: 'Le nom est requis.'),
                     new Length([
                         'min' => 3,
                         'max' => 100,
