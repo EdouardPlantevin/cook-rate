@@ -30,7 +30,7 @@ class Team
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'teams')]
     private Collection $contributors;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 8, unique: true)]
     private ?string $code = null;
 
     public function __construct()
